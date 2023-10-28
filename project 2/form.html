@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Survey Form</title>
+    <style>
+        /* CSS for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Customer Survey Form</h2>
+ 
+    <form id="surveyForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="UK">INDIA</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+           
+        </select><br><br>
+
+        <label>Gender:</label><br>
+        <input type="checkbox" id="male" name="gender" value="Male"> <label for="male">Male</label><br>
+        <input type="checkbox" id="female" name="gender" value="Female"> <label for="female">Female</label><br>
+        <input type="checkbox" id="other" name="gender" value="Other"> <label for="other">Other</label><br><br>
+
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" name="profession" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" required><br><br>
+
+        <button type="button" id="submitButton">Submit</button>
+        <button type="button" id="resetButton">Reset</button>
+    </form>
+
+    <!-- Popup to display submitted values -->
+    <div id="popup" class="popup">
+        <h3>Survey Form Submission</h3>
+        <div id="popupContent"></div>
+        <button id="closePopup">Close</button>
+    </div>
+
+    <script>
+        // Function to display the popup with form values
+        function displayPopup() {
+            const popup = document.getElementById("popup");
+            const popupContent = document.getElementById("popupContent");
+            const form = document.getElementById("surveyForm");
+
+            popupContent.innerHTML = "<strong>First Name:</strong> " + form.firstName.value + "<br>" +
+                                    "<strong>Last Name:</strong> " + form.lastName.value + "<br>" +
+                                    "<strong>Date of Birth:</strong> " + form.dob.value + "<br>" +
+                                    "<strong>Country:</strong> " + form.country.value + "<br>" +
+                                    "<strong>Gender:</strong> " + 
+                                    (form.gender.value ? form.gender.value : "Not specified") + "<br>" +
+                                    "<strong>Profession:</strong> " + form.profession.value + "<br>" +
+                                    "<strong>Email:</strong> " + form.email.value + "<br>" +
+                                    "<strong>Mobile Number:</strong> " + form.mobile.value;
+            
+            popup.style.display = "block";
+
+            // Reset the form after displaying the popup
+            form.reset();
+        }
+
+        // Function to close the popup
+        document.getElementById("closePopup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+        });
+
+        // Function to validate the form and submit
+        document.getElementById("submitButton").addEventListener("click", function() {
+            const form = document.getElementById("surveyForm");
+            if (form.checkValidity()) {
+                displayPopup();
+            } else {
+                alert("Please fill out all required fields.");
+            }
+        });
+
+        // Function to reset the form
+        document.getElementById("resetButton").addEventListener("click", function() {
+            document.getElementById("surveyForm").reset();
+        });
+    </script>
+</body>
+</html>
